@@ -1,6 +1,14 @@
 package edu.unl.cc.ape.view;
-
 import java.util.Scanner;
+
+/**
+ * @author Ashley Mocha, Matias Ortega, Sdier Roblez, Tyrone Encarnación
+ * Representa la planilla mensual de consumo eléctrico de un servicio doméstico.
+ * Tarifas por bloques (valores de prueba):
+ *   t1 = $0.10/kWh (primeros 100 kWh)
+ *   t2 = $0.15/kWh (de 101 a 200 kWh)
+ *   t3 = $0.20/kWh (más de 200 kWh)
+ */
 
 public class PlanillaExecutor {
     public static void main(String[] args) {
