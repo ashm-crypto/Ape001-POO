@@ -1,4 +1,4 @@
-package ape02;
+package edu.unl.cc.ape.domain;
 
 public class Fraccion {
     private int numerador;
