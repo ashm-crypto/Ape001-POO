@@ -2,6 +2,10 @@ package edu.unl.cc.ape.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * @author Ashley Mocha, Matias Ortega, Sdier Roblez, Tyrone Encarnación
+ * Cuenta bancaria con menú interactivo
+ */
 
 public class CuentaBancaria {
     private final String numeroCuenta;
