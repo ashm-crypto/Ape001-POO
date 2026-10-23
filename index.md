@@ -33,7 +33,16 @@
 
 ___
 
-## 📚[Problema 1](problema1.md)
-## 📚[Problema 2](problema2.md)
-## 📚[Problema 3](Problema3.md)
-## 📚[Problema 4](Problema4.md)
+## 📚Problema 1: Fracción matemática.
+### [Fraccion](problema1fraccion.java)
+### [Execurtor_de_Fraccion](problema1ExecutorFraccion.java)
+## 📚Problema 2:  Planilla de consumo eléctrico.
+### [Consumo](problema2consumo.java)
+### [Executor_Consumo](problema2ExecutorConsumo.java)
+## 📚Problema 3: Ecuación cuadrática con menú interactivo.
+### [Ecuación](problema3ecuacion.java)
+### [Executor_Ecuacion](problema3ExecutorEcuacion.java)
+## 📚Problema 4: Cuenta bancaria con menú interactivo.
+### [Cuenta](problema2cuenta.java)
+### [Executor_Cuenta](problema2ExecutorCuenta.java)
+
