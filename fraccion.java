@@ -9,12 +9,12 @@ public class Fraccion {
             throw new IllegalArgumentException("Error: el denominador no puede ser cero.");
         }
 
-        // Se simplifica al crear el objeto, así todo resultado ya sale simplificado.
+
         int mcd = calcularMcd(Math.abs(numerador), Math.abs(denominador));
         int num = numerador / mcd;
         int den = denominador / mcd;
 
-        // El signo siempre se mantiene en el numerador
+ 
         if (den < 0) {
             num = -num;
             den = -den;
@@ -33,7 +33,7 @@ public class Fraccion {
     }
 
     public Fraccion sumar(Fraccion otra) {
-        // Se usa el MCM de los denominadores en lugar de multiplicar en cruz
+      
         int mcm = calcularMcm(this.denominador, otra.denominador);
         int nuevoNum = (mcm / this.denominador) * this.numerador + (mcm / otra.denominador) * otra.numerador;
         return new Fraccion(nuevoNum, mcm);
@@ -67,7 +67,7 @@ public class Fraccion {
         return new Fraccion(denominador, numerador);
     }
 
-    // Máximo Común Divisor (algoritmo de Euclides)
+    
     private int calcularMcd(int a, int b) {
         while (b != 0) {
             int temp = b;
@@ -77,12 +77,12 @@ public class Fraccion {
         return a;
     }
 
-    // Mínimo Común Múltiplo
+    
     private int calcularMcm(int a, int b) {
         return (a * b) / calcularMcd(a, b);
     }
 
-    // Notación pedida en el problema: [n / d]
+    
     public String aNotacion() {
         return "[" + numerador + " / " + denominador + "]";
     }
