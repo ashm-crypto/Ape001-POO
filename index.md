@@ -34,15 +34,15 @@
 ___
 
 ## 📚Problema 1: Fracción matemática.
-### [Fraccion](problema1fraccion.java)
-### [Execurtor_de_Fraccion](problema1ExecutorFraccion.java)
+### [Fraccion](fraccion.java)
+### [Execurtor_de_Fraccion](ExecutorFraccion.java)
 ## 📚Problema 2:  Planilla de consumo eléctrico.
-### [Consumo](problema2consumo.java)
-### [Executor_Consumo](problema2ExecutorConsumo.java)
+### [Consumo](consumo.java)
+### [Executor_Consumo](ExecutorConsumo.java)
 ## 📚Problema 3: Ecuación cuadrática con menú interactivo.
-### [Ecuación](problema3ecuacion.java)
-### [Executor_Ecuacion](problema3ExecutorEcuacion.java)
+### [Ecuación](ecuacion.java)
+### [Executor_Ecuacion](ExecutorEcuacion.java)
 ## 📚Problema 4: Cuenta bancaria con menú interactivo.
-### [Cuenta](problema2cuenta.java)
-### [Executor_Cuenta](problema2ExecutorCuenta.java)
+### [Cuenta](cuenta.java)
+### [Executor_Cuenta](ExecutorCuenta.java)
 
