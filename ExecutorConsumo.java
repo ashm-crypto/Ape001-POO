@@ -1,4 +1,4 @@
-package edu.unl.cc;
+package edu.unl.cc.ape.view;
 
 import java.util.Scanner;
 
