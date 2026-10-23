@@ -5,7 +5,7 @@ public class Fraccion {
 
     public Fraccion(int numerador, int denominador) {
         if (denominador == 0) {
-            throw new IllegalArgumentException("Error: el denominador no puede ser cero.");
+            throw new IllegalArgumentException("El denominador no puede ser cero.");
         }
         
         int mcd = calcularMcd(Math.abs(numerador), Math.abs(denominador));
@@ -50,7 +50,7 @@ public class Fraccion {
 
     public Fraccion inversa() {
         if (numerador == 0) {
-            throw new IllegalArgumentException("Error: fracción con numerador cero no tiene inversa.");
+            throw new IllegalArgumentException("Una fracción con numerador cero no tiene inversa.");
         }
         return new Fraccion(denominador, numerador);
     }
