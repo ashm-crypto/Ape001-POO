@@ -8,13 +8,10 @@ public class Fraccion {
             throw new IllegalArgumentException("Error: el denominador no puede ser cero.");
         }
         
-        // Eficiencia: Simplificamos directamente al crear el objeto. 
-        // Así evitamos tener que llamar a simplificar() en cada operación.
         int mcd = calcularMcd(Math.abs(numerador), Math.abs(denominador));
         int num = numerador / mcd;
         int den = denominador / mcd;
         
-        // Mantener el signo siempre en el numerador
         if (den < 0) {
             num = -num;
             den = -den;
@@ -25,8 +22,6 @@ public class Fraccion {
     }
 
     public Fraccion sumar(Fraccion otra) {
-        // Eficiencia (lo que mencionó el profesor): Usar el Mínimo Común Múltiplo (MCM) 
-        // evita multiplicar en cruz a ciegas, reduciendo el tamaño de los números en memoria.
         int mcm = calcularMcm(this.denominador, otra.denominador);
         int nuevoNum = (mcm / this.denominador) * this.numerador + (mcm / otra.denominador) * otra.numerador;
         return new Fraccion(nuevoNum, mcm);
@@ -60,7 +55,6 @@ public class Fraccion {
         return new Fraccion(denominador, numerador);
     }
 
-    // Método privado para calcular Máximo Común Divisor
     private int calcularMcd(int a, int b) {
         while (b != 0) {
             int temp = b;
@@ -70,14 +64,13 @@ public class Fraccion {
         return a;
     }
 
-    // Método privado para calcular Mínimo Común Múltiplo
     private int calcularMcm(int a, int b) {
         return (a * b) / calcularMcd(a, b);
     }
 
     @Override
     public String toString() {
-        if (denominador == 1) return String.valueOf(numerador); // Mostrar "2" en vez de "2/1"
+        if (denominador == 1) return String.valueOf(numerador); 
         return numerador + "/" + denominador;
     }
 }
