@@ -1,4 +1,9 @@
+package edu.unl.cc.ape.view
 import java.util.Scanner;
+ /**
+ * @author Ashley Mocha, Matias Ortega, Sdier Roblez, Tyrone Encarnación
+ * Ecuación cuadrática con menú interactivo
+ */
 
 public class Main {
 
