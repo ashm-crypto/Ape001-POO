@@ -1,4 +1,3 @@
-// Volver a index.md: https://github.com/USUARIO/REPOSITORIO/blob/main/index.md
 package edu.unl.cc.ape.view;
 
 import edu.unl.cc.ape.domain.CuentaBancaria;
