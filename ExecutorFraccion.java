@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
 
-        Fraccion actual = null; // fracción con la que se trabaja
+        Fraccion actual = null; 
         int opcion;
 
         do {
@@ -68,7 +68,7 @@ public class Main {
         return true;
     }
 
-    // Pide numerador y denominador; devuelve null si el denominador es 0
+    
     private static Fraccion ingresarFraccion(String etiqueta) {
         int num = leerEntero("Ingrese el numerador" + etiqueta + ": ");
         int den = leerEntero("Ingrese el denominador" + etiqueta + ": ");
@@ -109,7 +109,6 @@ public class Main {
         }
     }
 
-    // Lee un entero validando que no se ingrese texto
     private static int leerEntero(String mensaje) {
         while (true) {
             System.out.print(mensaje);
@@ -117,7 +116,7 @@ public class Main {
                 return sc.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida. Ingrese un número entero.");
-                sc.next(); // descarta el texto incorrecto
+                sc.next(); 
             }
         }
     }
