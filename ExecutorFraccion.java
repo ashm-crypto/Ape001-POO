@@ -1,4 +1,4 @@
-package ape02;
+package edu.unl.cc.ape.view;
 
 import java.util.InputMismatchException;
 import java.util.Locale;
