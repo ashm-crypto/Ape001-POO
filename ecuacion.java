@@ -1,3 +1,9 @@
+package edu.unl.cc.ape.domain;
+/**
+ * @author Ashley Mocha, Matias Ortega, Sdier Roblez, Tyrone Encarnación
+ * Ecuación cuadrática con menú interactivo
+ */
+
 public class EcuacionCuadratica {
 
     private double a;
