@@ -1,4 +1,3 @@
-package ape02;
 
 public class Fraccion {
     private int numerador;
