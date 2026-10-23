@@ -1,4 +1,4 @@
-package edu.unl.cc;
+package edu.unl.cc.ape.domain;
 
 /**
  * Representa la planilla mensual de consumo eléctrico de un servicio doméstico.
