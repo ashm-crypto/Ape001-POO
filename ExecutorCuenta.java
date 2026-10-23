@@ -3,6 +3,10 @@ package edu.unl.cc.ape.view;
 import edu.unl.cc.ape.domain.CuentaBancaria;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+/**
+ * @author Ashley Mocha, Matias Ortega, Sdier Roblez, Tyrone Encarnación
+ * Cuenta bancaria con menú interactivo
+ */
 
 public class CuentaBancariaExecutor {
     private final Consola consola;
