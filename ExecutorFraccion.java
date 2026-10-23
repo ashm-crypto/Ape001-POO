@@ -1,10 +1,12 @@
 package edu.unl.cc.ape.view;
 
 import edu.unl.cc.ape.domain.Fraccion;
-
 import java.util.Locale;
 import java.util.Scanner;
 
+    /** @author Ashley Mocha, Matias Ortega, Sdier Roblez, Tyrone Encarnación
+     *  Operations with fractions
+     */
 public class FraccionExecutor {
 
     private static final Scanner sc = new Scanner(System.in);
