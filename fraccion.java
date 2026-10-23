@@ -9,19 +9,33 @@ public class Fraccion {
             throw new IllegalArgumentException("Error: el denominador no puede ser cero.");
         }
 
+        // Se trabaja con long para que Math.abs(Integer.MIN_VALUE) y los cálculos no desborden
+        long n = numerador;
+        long d = denominador;
+        long mcd = calcularMcd(Math.abs(n), Math.abs(d));
+        n = n / mcd;
+        d = d / mcd;
 
-        int mcd = calcularMcd(Math.abs(numerador), Math.abs(denominador));
-        int num = numerador / mcd;
-        int den = denominador / mcd;
-
- 
-        if (den < 0) {
-            num = -num;
-            den = -den;
+        // El signo siempre se mantiene en el numerador
+        if (d < 0) {
+            n = -n;
+            d = -d;
         }
 
-        this.numerador = num;
-        this.denominador = den;
+        // toIntExact lanza ArithmeticException si el valor no cabe en un int
+        this.numerador = Math.toIntExact(n);
+        this.denominador = Math.toIntExact(d);
+    }
+
+    // Crea una fracción a partir de long: primero simplifica y luego convierte a int
+    private static Fraccion desdeLong(long n, long d) {
+        if (d == 0) {
+            throw new IllegalArgumentException("Error: el denominador no puede ser cero.");
+        }
+        long mcd = calcularMcd(Math.abs(n), Math.abs(d));
+        n = n / mcd;
+        d = d / mcd;
+        return new Fraccion(Math.toIntExact(n), Math.toIntExact(d));
     }
 
     public int getNumerador() {
@@ -33,27 +47,27 @@ public class Fraccion {
     }
 
     public Fraccion sumar(Fraccion otra) {
-      
-        int mcm = calcularMcm(this.denominador, otra.denominador);
-        int nuevoNum = (mcm / this.denominador) * this.numerador + (mcm / otra.denominador) * otra.numerador;
-        return new Fraccion(nuevoNum, mcm);
+        // MCM de los denominadores en lugar de multiplicar en cruz
+        long mcm = calcularMcm(this.denominador, otra.denominador);
+        long nuevoNum = (mcm / this.denominador) * this.numerador + (mcm / otra.denominador) * otra.numerador;
+        return desdeLong(nuevoNum, mcm);
     }
 
     public Fraccion restar(Fraccion otra) {
-        int mcm = calcularMcm(this.denominador, otra.denominador);
-        int nuevoNum = (mcm / this.denominador) * this.numerador - (mcm / otra.denominador) * otra.numerador;
-        return new Fraccion(nuevoNum, mcm);
+        long mcm = calcularMcm(this.denominador, otra.denominador);
+        long nuevoNum = (mcm / this.denominador) * this.numerador - (mcm / otra.denominador) * otra.numerador;
+        return desdeLong(nuevoNum, mcm);
     }
 
     public Fraccion multiplicar(Fraccion otra) {
-        return new Fraccion(this.numerador * otra.numerador, this.denominador * otra.denominador);
+        return desdeLong((long) this.numerador * otra.numerador, (long) this.denominador * otra.denominador);
     }
 
     public Fraccion dividir(Fraccion otra) {
         if (otra.numerador == 0) {
-            throw new IllegalArgumentException("Error: división por cero.");
+            throw new IllegalArgumentException("Error: no se puede dividir entre una fracción con numerador cero.");
         }
-        return new Fraccion(this.numerador * otra.denominador, this.denominador * otra.numerador);
+        return desdeLong((long) this.numerador * otra.denominador, (long) this.denominador * otra.numerador);
     }
 
     public double valorDecimal() {
@@ -62,27 +76,27 @@ public class Fraccion {
 
     public Fraccion inversa() {
         if (numerador == 0) {
-            throw new IllegalArgumentException("Error: fracción con numerador cero no tiene inversa.");
+            throw new IllegalArgumentException("Error: una fracción con numerador cero no tiene inversa.");
         }
         return new Fraccion(denominador, numerador);
     }
 
-    
-    private int calcularMcd(int a, int b) {
+    // Máximo Común Divisor (algoritmo de Euclides)
+    private static long calcularMcd(long a, long b) {
         while (b != 0) {
-            int temp = b;
+            long temp = b;
             b = a % b;
             a = temp;
         }
         return a;
     }
 
-    
-    private int calcularMcm(int a, int b) {
-        return (a * b) / calcularMcd(a, b);
+    // Mínimo Común Múltiplo
+    private static long calcularMcm(long a, long b) {
+        return (a / calcularMcd(a, b)) * b;
     }
 
-    
+    // Notación pedida en el problema: [n / d]
     public String aNotacion() {
         return "[" + numerador + " / " + denominador + "]";
     }
