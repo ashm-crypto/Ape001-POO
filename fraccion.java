@@ -1,5 +1,7 @@
 package edu.unl.cc.ape.domain;
-
+    /** @author Ashley Mocha, Matias Ortega, Sdier Roblez, Tyrone Encarnación
+     *  Operations with fractions
+     */
 public class Fraccion {
     private int numerador;
     private int denominador;
