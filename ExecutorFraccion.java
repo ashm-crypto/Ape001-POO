@@ -1,17 +1,20 @@
 package edu.unl.cc.ape.view;
 
-import java.util.InputMismatchException;
+import edu.unl.cc.ape.domain.Fraccion;
+
 import java.util.Locale;
 import java.util.Scanner;
 
-public class Main {
+public class FraccionExecutor {
 
     private static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
 
-        Fraccion actual = null; 
+        Fraccion actual = null;   
+        int numOriginal = 0;      
+        int denOriginal = 1;
         int opcion;
 
         do {
@@ -20,33 +23,47 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    actual = ingresarFraccion("");
-                    if (actual != null) {
-                        System.out.println("Fracción guardada: " + actual.aNotacion());
+                    int n = leerEntero("Ingrese el numerador: ");
+                    int d = leerEntero("Ingrese el denominador: ");
+                    try {
+                        actual = new Fraccion(n, d);
+                        numOriginal = n;
+                        denOriginal = d;
+                        System.out.println("Fracción guardada: " + n + "/" + d);
+                    } catch (IllegalArgumentException | ArithmeticException e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 2:
                     if (hayFraccion(actual)) {
-                        System.out.println("Fracción simplificada: " + actual.aNotacion());
+                        System.out.println(numOriginal + "/" + denOriginal + " simplificada = " + actual.aNotacion());
                     }
                     break;
                 case 3:
                     if (hayFraccion(actual)) {
-                        System.out.println("Valor aproximado: " + actual.valorDecimal());
+                        System.out.println("Valor aproximado de " + actual.aNotacion() + " = " + actual.valorDecimal());
                     }
                     break;
                 case 4:
                     if (hayFraccion(actual)) {
-                        operar(actual);
+                        actual = operar(actual);
+                        
+                        numOriginal = actual.getNumerador();
+                        denOriginal = actual.getDenominador();
                     }
                     break;
                 case 5:
+                    if (hayFraccion(actual)) {
+                        mostrarInversa(actual);
+                    }
+                    break;
+                case 6:
                     System.out.println("Programa finalizado.");
                     break;
                 default:
-                    System.out.println("Opción inválida. Elija un número del 1 al 5.");
+                    System.out.println("Opción inválida. Elija un número del 1 al 6.");
             }
-        } while (opcion != 5);
+        } while (opcion != 6);
 
         sc.close();
     }
@@ -57,7 +74,8 @@ public class Main {
         System.out.println("2. Mostrar fracción simplificada");
         System.out.println("3. Mostrar valor aproximado");
         System.out.println("4. Operar con otra fracción (+, -, *, /)");
-        System.out.println("5. Salir");
+        System.out.println("5. Mostrar inversa");
+        System.out.println("6. Salir");
     }
 
     private static boolean hayFraccion(Fraccion f) {
@@ -68,33 +86,31 @@ public class Main {
         return true;
     }
 
-    
-    private static Fraccion ingresarFraccion(String etiqueta) {
-        int num = leerEntero("Ingrese el numerador" + etiqueta + ": ");
-        int den = leerEntero("Ingrese el denominador" + etiqueta + ": ");
+    private static void mostrarInversa(Fraccion actual) {
         try {
-            return new Fraccion(num, den);
-        } catch (IllegalArgumentException e) {
+            Fraccion inv = actual.inversa();
+            System.out.println("Inversa de " + actual.aNotacion() + " = " + inv.aNotacion()
+                    + " = " + inv.valorDecimal());
+        } catch (IllegalArgumentException | ArithmeticException e) {
             System.out.println(e.getMessage());
-            return null;
         }
     }
 
-    private static void operar(Fraccion actual) {
-        System.out.print("Operación a realizar (+, -, *, /): ");
-        String op = sc.next().trim();
+    
+    private static Fraccion operar(Fraccion actual) {
+        String op = leerLinea("Operación a realizar (+, -, *, /): ").trim();
 
         if (!op.equals("+") && !op.equals("-") && !op.equals("*") && !op.equals("/")) {
             System.out.println("Operador inválido.");
-            return;
+            return actual;
         }
 
-        Fraccion otra = ingresarFraccion(" de la segunda fracción");
-        if (otra == null) {
-            return;
-        }
+        System.out.println("Ingrese la fracción con la que desea operar:");
+        int n = leerEntero("  Numerador: ");
+        int d = leerEntero("  Denominador: ");
 
         try {
+            Fraccion otra = new Fraccion(n, d);
             Fraccion resultado;
             switch (op) {
                 case "+": resultado = actual.sumar(otra); break;
@@ -104,19 +120,35 @@ public class Main {
             }
             System.out.println(actual.aNotacion() + " " + op + " " + otra.aNotacion()
                     + " = " + resultado.aNotacion() + " = " + resultado.valorDecimal());
-        } catch (IllegalArgumentException e) {
+
+            String r = leerLinea("¿Usar el resultado como fracción actual? (s/n): ").trim();
+            if (r.equalsIgnoreCase("s")) {
+                return resultado;
+            }
+        } catch (IllegalArgumentException | ArithmeticException e) {
             System.out.println(e.getMessage());
         }
+        return actual;
     }
 
+    
+    private static String leerLinea(String mensaje) {
+        System.out.print(mensaje);
+        if (!sc.hasNextLine()) {
+            System.out.println("\nNo hay más entrada. Programa finalizado.");
+            System.exit(0);
+        }
+        return sc.nextLine();
+    }
+
+    
     private static int leerEntero(String mensaje) {
         while (true) {
-            System.out.print(mensaje);
+            String texto = leerLinea(mensaje).trim();
             try {
-                return sc.nextInt();
-            } catch (InputMismatchException e) {
+                return Integer.parseInt(texto);
+            } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Ingrese un número entero.");
-                sc.next(); 
             }
         }
     }
